@@ -11,7 +11,7 @@ django安装：pip install django==3.2.*
 
 正式开始快速创建项目及app应用
 
-创建项目：
+一、创建项目：
 cmd终端输入命令：django-admin startproject myweb
 	进入你要做项目的目录输入命令
 	会在当前目录创建myweb目录，目录里面也有一个同名的目录，你可以把他当成外面的目录当成项目容器，里面的目录当成项目，还有一下项目文件。
@@ -31,7 +31,7 @@ cmd终端输入命令：django-admin startproject myweb
 		如：ALLOWED_HOSTS = ["192.168.43.136"] 或 ALLOWED_HOSTS = ["*"]
 		这样在同一网络下别人也可以访问你的服务了
 	查看目录：dir
-创建app：python manage.py startapp myapp
+二、创建app：python manage.py startapp myapp
 	cd到myweb执行命令
 	会在当前目录下创建一个myapp目录即app即项目应用
 	在views.py函数里面添加试图函数：
@@ -72,10 +72,58 @@ cmd终端输入命令：django-admin startproject myweb
 			]
 		在下面多加一个path路径'app02'表示网页地址路径，views.app02表示展示调用项目应用里面的函数，name='app02'表示给该路径取个名字自己定义，可以用来反向获取URL
 		
-
-
-
-
+三、项目的模型
+	1、连接数据库
+		在settings.py文件里面配置一下我们需要连接的数据库
+		如：
+			DATABASES = {
+				'default': {
+					'ENGINE': 'django.db.backends.sqlite3',
+					'NAME': BASE_DIR / 'db.sqlite3',
+				}
+			}
+			把这个替换成
+			DATABASES = {
+				'default': {
+					'ENGINE': 'django.db.backends.mysql',
+					'NAME': 'mydemo',
+					'USER': 'root',
+					'PASSWORD' 'ytl',
+					'HOST': 'localhost',
+					'PORT': '3306',
+				}
+			}
+	2、下载mysqlclient，执行mysql需要用到，一个加载模块
+		把之前的pymysql改成mysqlclient
+	3、在models.py文件里面创建数据类
+		如：
+			class Stu(models.Model):
+				```自定义Stu表对应的Model类```
+				# 定义属性：默认主键自增id字段可不写
+				id = models.AutoField(primary_key=True)
+				name = models.CharField(max_length=16)
+				age = models.SmallIntegrField()
+				sex = models.CharField(max_length=1)
+				classid = models.CharField(max_length=8)
+				
+				# 定义默认输出格式
+				def __str__(self):
+					return "%d:%s:%d:%s:%s:"%(self.id,self.name,self.age,seek.sex,self.classid)
+					
+				# 自定义对应的表明，默认表名：myapp_stu    
+				class Meta:
+					db_table="stu"
+		4、在settings.p配置文件里面把myapp应用添加进去
+			如：
+				INSTALLED_APPS = [
+					'django.contrib.admin',
+					'django.contrib.auth',
+					'django.contrib.contenttypes',
+					'django.contrib.sessions',
+					'django.contrib.messages',
+					'django.contrib.staticfiles',
+					'myapps',
+				]
 
 
 
