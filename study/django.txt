@@ -31,6 +31,7 @@ cmd终端输入命令：django-admin startproject myweb
 		如：ALLOWED_HOSTS = ["192.168.43.136"] 或 ALLOWED_HOSTS = ["*"]
 		这样在同一网络下别人也可以访问你的服务了
 	查看目录：dir
+	清理当前页面信息：cls
 二、创建app：python manage.py startapp myapp
 	cd到myweb执行命令
 	会在当前目录下创建一个myapp目录即app即项目应用
@@ -102,7 +103,7 @@ cmd终端输入命令：django-admin startproject myweb
 				# 定义属性：默认主键自增id字段可不写
 				id = models.AutoField(primary_key=True)
 				name = models.CharField(max_length=16)
-				age = models.SmallIntegrField()
+				age = models.SmallIntegerField()
 				sex = models.CharField(max_length=1)
 				classid = models.CharField(max_length=8)
 				
@@ -113,24 +114,90 @@ cmd终端输入命令：django-admin startproject myweb
 				# 自定义对应的表明，默认表名：myapp_stu    
 				class Meta:
 					db_table="stu"
-		4、在settings.p配置文件里面把myapp应用添加进去
-			如：
-				INSTALLED_APPS = [
-					'django.contrib.admin',
-					'django.contrib.auth',
-					'django.contrib.contenttypes',
-					'django.contrib.sessions',
-					'django.contrib.messages',
-					'django.contrib.staticfiles',
-					'myapps',
-				]
-
-
-
-
-
-
-
+	4、激活models：
+		在settings.p配置文件里面把myapp应用添加进去进行激活
+		如：
+			INSTALLED_APPS = [
+				'django.contrib.admin',
+				'django.contrib.auth',
+				'django.contrib.contenttypes',
+				'django.contrib.sessions',
+				'django.contrib.messages',
+				'django.contrib.staticfiles',
+				'myapps',
+			]
+	5、使用查看是否连接成功
+		在项目目录下输入命令：python manage.py shell
+		如：
+			>>> from myapp.models import Stu
+			>>> mod = Stu.objects
+			>>> mod.get(id=2)
+			可以打印出：<Stu: 2:lisi:22:w:python03:>
+			说明连接成功
+			打印全部
+			>>> slist = mod.all()
+			>>> for s in slist:
+			...     print(s)
+			输出全部数据：
+				1:zhangsan:20:m:python02:
+				2:lisi:22:w:python03:
+				3:wanwu:21:m:python05:
+四、启动网站Admin管理
+先介绍一下在settings.py文件里面有添加自己的app
+	INSTALLED_APPS = [
+		'django.contrib.admin', # 管理网站
+		'django.contrib.auth', # 认证系统
+		'django.contrib.contenttypes',  # 内容类型的框架
+		'django.contrib.sessions',  # 会话框架
+		'django.contrib.messages',  # 消息框架
+		'django.contrib.staticfiles',  # 管理静态文件的框架
+		'myapp',  # 自己增加的app
+	]
+1、数据迁移：python manage.py migrate
+	出现这个说明成功：
+		Operations to perform:
+		  Apply all migrations: admin, auth, contenttypes, sessions
+		Running migrations:
+		  Applying contenttypes.0001_initial... OK
+		  Applying auth.0001_initial... OK
+		  Applying admin.0001_initial... OK
+		  Applying admin.0002_logentry_remove_auto_add... OK
+		  Applying admin.0003_logentry_add_action_flag_choices... OK
+		  Applying contenttypes.0002_remove_content_type_name... OK
+		  Applying auth.0002_alter_permission_name_max_length... OK
+		  Applying auth.0003_alter_user_email_max_length... OK
+		  Applying auth.0004_alter_user_username_opts... OK
+		  Applying auth.0005_alter_user_last_login_null... OK
+		  Applying auth.0006_require_contenttypes_0002... OK
+		  Applying auth.0007_alter_validators_add_error_messages... OK
+		  Applying auth.0008_alter_user_username_max_length... OK
+		  Applying auth.0009_alter_user_last_name_max_length... OK
+		  Applying auth.0010_alter_group_name_max_length... OK
+		  Applying auth.0011_update_proxy_permissions... OK
+		  Applying auth.0012_alter_user_first_name_max_length... OK
+		  Applying sessions.0001_initial... OK
+2、创建超级用户：python manage.py createsuperuser
+	Username (leave blank to use 'administrator'): admin # 输入用户名
+	Email address: 1766842398@qq.com  # 邮箱
+	Password:  # 密码
+	Password (again): # 确认密码
+	The password is too similar to the username.
+	This password is too common.
+	Bypass password validation and create user anyway? [y/N]: y # 是否跳过密码验证并创建用户？选择是就行
+	Superuser created successfully. # 创建超级用户成功
+3、设置中文
+	上面创建完成超级用户登录进去之后会发现都是英文，这里不要怕我们可以设中文，在settings.py配置文件里面修改一下就行了。
+	如：
+	LANGUAGE_CODE = 'zh-hans'
+	TIME_ZONE = 'Asia/Shanghai'
+	在访问就成中文了
+4、将我们自定义的应用程序加入到后台管理
+	打开myapp/admin.py 文件，导入自己定义好的数据类，在添加到管理员里面
+	from myapp.models import Stu
+	admin.site.register(Stu)
+5、更深入设计后台管理
+	因为直接用的话后台管理不太美观所有我们自己设计一下
+	
 
 
 
