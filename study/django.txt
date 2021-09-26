@@ -109,11 +109,35 @@ cmd终端输入命令：django-admin startproject myweb
 				
 				# 定义默认输出格式
 				def __str__(self):
-					return "%d:%s:%d:%s:%s:"%(self.id,self.name,self.age,seek.sex,self.classid)
+					return "%d:%s:%d:%s:%s:"%(self.id,self.name,self.age,self.sex,self.classid)
 					
 				# 自定义对应的表明，默认表名：myapp_stu    
 				class Meta:
 					db_table="stu"
+		字段类型：
+			AutoField: 一个根据实际ID自动增长的IntegerField，通常不指定，如不指定，一个主键字段蒋自动添加到模型中
+			BooleanField: True/false字段，此字段的默认表单控制是CheckboxInput
+			NullBooleanField: 支持null、true、false三种
+			CharField(max_length=字符长度): 字符串，默认的表单样式是TextInput
+			TextField: 大文本字段，一般超过4000使用，默认的表单控件是Textares
+			IntegerField: 整数
+			DecimalField(max_digits=None,decimal_places=None): 使用python的Decimal实例表示的十进制浮点数
+				DecimalField.max_digits: 位数总数
+				DecimalField.declmal_places: 小数点后的数字位数
+			FloatField: 用python的float实例来表示浮点数
+			DateField([auto_now=False,auto_now_add=False]): 使用python的datetime.date实例表示日期
+		查询：
+			all()
+			filter()
+			exclude()
+			order_by()
+			values()
+		返回单个值的方法：
+			get():返回单个满足条件的对象
+			coune(): 返回当前查询的总条数
+			first(): 返回第一个对象
+			last(): 返回最后一个对象
+			exlsts(): 判断查询集中是否有数据，如果有则返回True
 	4、激活models：
 		在settings.p配置文件里面把myapp应用添加进去进行激活
 		如：
