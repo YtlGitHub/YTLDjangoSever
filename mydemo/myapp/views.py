@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from django.urls import reverse  # 导入反向解析地址
 from myapp.models import Users
+from datetime import datetime
 # Create your views here.
 
 
@@ -47,15 +48,40 @@ def insertUsers(request):
 
 
 # 执行用户信息删除
-def delUsers(request):
-    pass 
+def delUsers(request, uid=0):
+    try:
+        ob = Users.objects.get(id=uid)  # 获取要删除的数据
+        ob.delete()  # 执行删除操作
+        context = {"info": "删除成功"}
+    except:
+        context = {"info": "删除失败"}
+    return render(request, "myapp/users/info.html", context)
 
 
 # 加载用户信息修改表单
-def editUsers(request):
-    pass
+def editUsers(request, uid=0):
+    try:
+        ob = Users.objects.get(id=uid)  # 获取要修改的数据
+        context = {"user": ob}
+        return render(request, "myapp/users/edit.html", context)
+    except:
+        context = {"info": "没有找到要修改的数据!"}
+        return render(request, "myapp/users/info.html", context)
 
 
 # 执行用户信息修改
 def updateUsers(request):
-    pass
+    try:
+        uid = request.POST['id']  # 获取要修改书记的id号
+        ob = Users.objects.get(id=uid)  # 查询要修改的数据
+        # 从表单中获取要修改的信息并封装到ob对象里面
+        ob.name = request.POST['name']
+        ob.age = request.POST['age']
+        ob.sex = request.POST['sex']
+        ob.classid = request.POST['classid']
+        ob.addtime = datetime.now()
+        ob.save()  # 执行保存
+        context = {"info": "修改成功"}
+    except:
+        context = {"info": "修改失败"}
+    return render(request, "myapp/users/info.html", context)

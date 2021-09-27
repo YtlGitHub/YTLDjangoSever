@@ -29,7 +29,10 @@
                 <td>{{user.sex}}</td>
                 <td>{{user.classid}}</td>
                 <td>{{user.addtime}}</td>
-                <td>编辑 删除</td>
+                <td>
+                    <a href="{% url 'editUsers' user.id %}">编辑</a>
+                    <a href="{% url 'delUsers' user.id %}">删除</a>
+                </td>
             </tr>
         {% endfor %}
     </table>

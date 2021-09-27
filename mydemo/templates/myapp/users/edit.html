@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户信息管理</title>
+    <title>Title</title>
 </head>
 <body>
     <center>
@@ -10,29 +10,30 @@
     <a href="{% url 'indexUsers' %}">浏览用户信息</a> |
     <a href="{% url 'addUsers' %}">添加用户信息</a>
     <hr/>
-    <h3>添加用户信息</h3>
-        <form action="{% url 'insertUsers' %}" method="post">
+    <h3>编辑用户信息</h3>
+        <form action="{% url 'updateUsers' %}" method="post">
             {% csrf_token %}  <!-- 添加令牌 -->
+            <input type="hidden" name="id" value="{{user.id}}"/>  <!-- 隐藏域添加id -->
             <table width="280" border="0">
                 <tr>
                     <td>姓名：</td>
-                    <td><input type="text" name="name"/></td>
+                    <td><input type="text" name="name" value="{{user.name}}"/></td>
                 </tr>
                 <tr>
                     <td>年龄：</td>
-                    <td><input type="text" name="age"/></td>
+                    <td><input type="text" name="age" value="{{user.age}}"/></td>
                 </tr>
                 <tr>
                     <td>性别：</td>
-                    <td><input type="text" name="sex"/></td>
+                    <td><input type="text" name="sex" value="{{user.sex}}"/></td>
                 </tr>
                 <tr>
                     <td>班级：</td>
-                    <td><input type="text" name="classid"/></td>
+                    <td><input type="text" name="classid" value="{{user.classid}}"/></td>
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <input type="submit" value="添加"/>
+                        <input type="submit" value="修改"/>
                         <input type="reset" value="重置"/>
                     </td>
                 </tr>
