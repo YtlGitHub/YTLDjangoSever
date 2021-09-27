@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>用户信息管理</title>
+    {% include "myapp/users/style.html" %}
+    <script>
+        //自定义执行信息删除提示判断，参数uu是成功的删除url地址
+        function doDel(uu){
+            if (confirm("确定要删除？")){
+                //网页跳转
+                window.location=uu;
+            }
+        }
+    </script>
 </head>
 <body>
 <center>
-    <H1>用户信息管理</H1>
-    <a href="{% url 'indexUsers' %}">浏览用户信息</a> |
-    <a href="{% url 'addUsers' %}">添加用户信息</a>
-    <hr/>
+    {% include "myapp/users/menu.html" %}  <!-- 表头公共部分进行页面拆分，用include导入我们自己写好的公告部分 -->
     <h3>浏览用户信息</h3>
     <table width="800" border="1">
         <tr>
@@ -31,7 +38,7 @@
                 <td>{{user.addtime}}</td>
                 <td>
                     <a href="{% url 'editUsers' user.id %}">编辑</a>
-                    <a href="{% url 'delUsers' user.id %}">删除</a>
+                    <a href="javascript:doDel('{% url 'delUsers' user.id %}');">删除</a>
                 </td>
             </tr>
         {% endfor %}

@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>用户信息管理</title>
+    {% include "myapp/users/style.html" %}
 </head>
 <body>
     <center>
-    <H1>用户信息管理</H1>
-    <a href="{% url 'indexUsers' %}">浏览用户信息</a> |
-    <a href="{% url 'addUsers' %}">添加用户信息</a>
-    <hr/>
+    {% include "myapp/users/menu.html" %}  <!-- 表头公共部分进行页面拆分，用include导入我们自己写好的公告部分 -->
     <h3>编辑用户信息</h3>
         <form action="{% url 'updateUsers' %}" method="post">
             {% csrf_token %}  <!-- 添加令牌 -->
