@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息管理</title>
+</head>
+<body>
+<center>
+    <H1>用户信息管理</H1>
+    <a href="{% url 'indexUsers' %}">浏览用户信息</a> |
+    <a href="{% url 'addUsers' %}">添加用户信息</a>
+    <hr/>
+    <h3>操作提示信息信息</h3>
+    <h4>{{info}}</h4>
+</center>
+</body>
+</html>

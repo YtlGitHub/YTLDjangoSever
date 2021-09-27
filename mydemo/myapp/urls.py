@@ -1,12 +1,13 @@
-from django.urls import path, re_path
+from django.urls import path
 from . import views
 
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('index02', views.index02, name='index02'),
-    path('add/', views.add, name="add"),
-    path('find/<int:sid>/<str:name>/', views.find, name="find"),
-    path('edit/', views.update, name="edit"),
-    re_path(r'^fun/(?P<yy>[0-9]{4})/(?P<mm>[0-9]{2})$', views.fun, name="fun"),
+    path('users/', views.indexUsers, name='indexUsers'),
+    path('users/add/', views.addUsers, name="addUsers"),
+    path('users/insert/', views.insertUsers, name="insertUsers"),
+    path('users/del/<int:sid>/', views.delUsers, name="delUser"),
+    path('users/edit/<int:sid>/', views.editUsers, name="editUsers"),
+    path('users/update/', views.updateUsers, name="updateUsers"),
 ]
