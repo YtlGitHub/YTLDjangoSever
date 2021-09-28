@@ -13,7 +13,8 @@ def index(request):
     # print(reverse("edit"))
     # print(reverse("fun", args=(2021, 12)))
     # return redirect(reverse("fun", args=(2021, 12)))  # 路由重定向
-    return HttpResponse("首页 <br> <a href='/users'>用户信息管理</a>")
+    # return HttpResponse("首页 <br> <a href='/users'>用户信息管理</a>")
+    return render(request, "myapp/users/index01.html")
 
 
 # 浏览用户信息
