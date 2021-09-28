@@ -30,7 +30,7 @@ class Family(models.Model):
     sex = models.CharField('性别', max_length=32)
     address = models.CharField('地址', max_length=32)
     phone = models.CharField('电话号码', max_length=16)
-    birthday = models.DateTimeField('生日')
+    birthday = models.DateTimeField('生日', default=datetime.now)
     addTime = models.DateTimeField('添加时间', default=datetime.now)
 
     # def __str__(self):
