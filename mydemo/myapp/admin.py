@@ -21,4 +21,4 @@ class UsersAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name', )
     list_per_page = 10
     ordering = ('id', )
-    list_editable = ['birthday', ]
+    # list_editable = ['birthday', ]
