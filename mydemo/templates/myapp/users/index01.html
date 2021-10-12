@@ -13,6 +13,10 @@
 
 <div id="menu" style="color: rgb(255, 255, 255);background-color: rgb(40, 51, 62);height:900px;width:maxpx;float:left;">
 <table>
+	<tr>
+		<td>当前时间：</td>
+		<td style="color: rgb(255, 255, 255);">{{ time|date:"Y-m-d H:i:s w" }}</td>
+	</tr>
     <tr>
 		<td>点击登入进入后台管理：</td>
 		<td><a href="/admin" style="color: rgb(255, 255, 255);">登入</a></td>

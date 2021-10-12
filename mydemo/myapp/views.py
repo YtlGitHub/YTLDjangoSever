@@ -14,7 +14,9 @@ def index(request):
     # print(reverse("fun", args=(2021, 12)))
     # return redirect(reverse("fun", args=(2021, 12)))  # 路由重定向
     # return HttpResponse("首页 <br> <a href='/users'>用户信息管理</a>")
-    return render(request, "myapp/users/index01.html")
+    context = {}
+    context['time'] = datetime.now
+    return render(request, "myapp/users/index01.html", context)
 
 
 # 浏览用户信息
