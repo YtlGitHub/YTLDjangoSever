@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title1 %}父模板标题{% endblock %}</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+</head>
+<body>
+	<h2>{% block title2 %}父模板标题{% endblock %}</h2>
+	<p>
+		{% block mycontent %}
+			此处预留内容区域
+		{% endblock %}
+	</p>
+</body>
+</html>

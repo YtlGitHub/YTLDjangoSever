@@ -6,6 +6,7 @@ from datetime import datetime
 # Create your views here.
 
 
+# 首页
 def index(request):
     # print(reverse("add"))  # 通过路由名称反向生成url请求地址
     print(reverse("index"))
@@ -88,3 +89,7 @@ def updateUsers(request):
     except:
         context = {"info": "修改失败"}
     return render(request, "myapp/users/info.html", context)
+
+# 模板继承
+def inherit(request):
+    return render(request, "myapp/inherit/sub_template.html")

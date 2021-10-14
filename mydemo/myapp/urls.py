@@ -10,4 +10,5 @@ urlpatterns = [
     path('users/del/<int:uid>/', views.delUsers, name="delUsers"),
     path('users/edit/<int:uid>/', views.editUsers, name="editUsers"),
     path('users/update/', views.updateUsers, name="updateUsers"),
+    path('inherit/', views.inherit, name="inherit"),
 ]
