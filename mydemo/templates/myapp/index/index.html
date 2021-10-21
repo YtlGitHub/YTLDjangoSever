@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>杨天龙管理系统</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<style>
+		a{text-decoration:none; color:rgb(255,255,255);}
+		a:hover{text-decoration:none; color:rgb(0,255,255);}
+	</style>
 </head>
 <body>
 <div id="header" style="background-color: #417690; color: #ffc; width:maxpx;">
@@ -11,25 +15,29 @@
 <h1 style="margin-bottom:0;">杨天龙管理系统</h1>
 </center></div>
 
-<div id="menu" style="color: rgb(255, 255, 255);background-color: rgb(40, 51, 62);height:1200px;float:left;">
+<div id="menu" style="background-color: rgb(40, 51, 62);height:1200px;float:left;">
 <table>
 	<tr>
-		<td style="color: rgb(255, 255, 255);">{{ time|date:"Y-m-d H:i:s w" }}</td>
+		<td style="color: rgb(255,255,0)">{{ time|date:"Y-m-d H:i:s" }}</td>
+		<td style="color: rgb(255,255,0)">星期{{ time|date:"w" }}</td>
 	</tr>
     <tr>
-		<td><a href="/admin" style="color: rgb(255, 255, 255);">登入</a></td>
+		<td><a href="/admin">登入</a></td>
 	</tr>
 	<tr>
-		<td><a href="http://159.75.33.27" style="color: rgb(255, 255, 255);">YTLBlog</a></td>
+		<td><a href="http://159.75.33.27">YTLBlog</a></td>
 	</tr>
 	<tr>
-		<td><a href="/users" style="color: rgb(255, 255, 255);">测试用</a></td>
+		<td><a href="{% url 'indexUsers' %}">测试用</a></td>
 	</tr>
 	<tr>
-		<td><a href="{% url 'inherit' %}" style="color: rgb(255, 255, 255);">模板继承</a></td>
+		<td><a href="{% url 'indexUsers2' %}">测试2分页浏览</a></td>
 	</tr>
 	<tr>
-		<td><a href="{% url 'upload' %}" style="color: rgb(255, 255, 255);">加载文件上传表单</a></td>
+		<td><a href="{% url 'inherit' %}">模板继承</a></td>
+	</tr>
+	<tr>
+		<td><a href="{% url 'upload' %}">加载文件上传表单</a></td>
 	</tr>
 </table></div>
 

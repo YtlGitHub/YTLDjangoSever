@@ -25,10 +25,20 @@ def index(request):
 
 # 浏览用户信息
 def index_users(request):
-    #try:
+    try:
         ulist = Users.objects.all()
         context = {"userslist": ulist}
         return render(request, "myapp/users/index.html", context)  # 加载模板
+    except:
+        return HttpResponse("没有找到用户信息！")
+
+
+# 浏览用户信息
+def index_users2(request):
+    #try:
+        ulist = Users.objects.all()
+        context = {"userslist": ulist}
+        return render(request, "myapp/users/index2.html", context)  # 加载模板
     #except:
         #return HttpResponse("没有找到用户信息！")
 

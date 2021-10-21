@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name="index"),  # 首页
     path('users/', views.index_users, name='indexUsers'),  # 浏览用户信息
+    path('users2/', views.index_users2, name='indexUsers2'),  # 浏览用户信息
     path('users/add/', views.add_users, name="addUsers"),  # 加载添加用户信息
     path('users/insert/', views.insert_users, name="insertUsers"),  # 执行用户信息添加
     path('users/del/<int:uid>/', views.del_users, name="delUsers"),  # 执行用户信息删除
