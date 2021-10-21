@@ -6,6 +6,7 @@ from datetime import datetime
 from PIL import Image
 import time
 import os
+from django.core.paginator import Paginator
 # Create your views here.
 
 
@@ -35,12 +36,14 @@ def index_users(request):
 
 # 浏览用户信息
 def index_users2(request):
-    #try:
-        ulist = Users.objects.all()
+    # try:
+        list = Users.objects.filter()
+        p = Paginator(list, 5)  # 以5条数据一页实例化分页对象
+        ulist = p.page(1)
         context = {"userslist": ulist}
         return render(request, "myapp/users/index2.html", context)  # 加载模板
-    #except:
-        #return HttpResponse("没有找到用户信息！")
+    # except:
+    #     return HttpResponse("没有找到用户信息！")
 
 
 # 加载添加用户信息
