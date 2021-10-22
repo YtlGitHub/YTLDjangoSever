@@ -16,8 +16,19 @@
 </head>
 <body>
 <center>
-    {% include "myapp/users/menu.html" %}  <!-- 表头公共部分进行页面拆分，用include导入我们自己写好的公告部分 -->
+    <H1>用户信息管理</H1>
+        <a href="{% url 'index' %}">返回首页</a> |
+        <a href="{% url 'indexUsers2' 1 %}">浏览用户信息</a> |
+        <a href="{% url 'addUsers' %}">添加用户信息</a>
+        {% csrf_token %}
+    <hr/>  <!-- 表头公共部分进行页面拆分，用include导入我们自己写好的公告部分 -->
     <h3>分页浏览用户信息</h3>
+
+    <form action="{% url 'indexUsers2' 1 %}" method="get">
+        姓名：<input type="text" size="10" name="keyword"/>
+        <input type="submit" value="搜索"/>
+    </form><br/>
+
     <table width="800" border="1">
         <tr>
             <th>ID号</th>
@@ -47,6 +58,16 @@
             </tr>
         {% endfor %}
     </table>
+    <br/>
+    <a href="{% url 'indexUsers2' n|add:-1 %}">上一页</a>
+    {% for p in pagelist %}
+        {% if n == p %}
+            &nbsp;&nbsp; <a href="{% url 'indexUsers2' p %}" style="color:red">{{p}}</a> &nbsp;&nbsp;
+        {% else %}
+            &nbsp;&nbsp; <a href="{% url 'indexUsers2' p %}">{{p}}</a> &nbsp;&nbsp;
+        {% endif %}
+    {% endfor %}
+    <a href="{% url 'indexUsers2' n|add:1 %}">下一页</a>
 </center>
 </body>
 </html>
