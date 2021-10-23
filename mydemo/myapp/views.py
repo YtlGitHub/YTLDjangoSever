@@ -25,7 +25,7 @@ def index(request):
 
 
 # 浏览用户信息
-def index_users(request):
+def all_users(request):  # 所有用户信息
     try:
         ulist = Users.objects.all()
         context = {"userslist": ulist}
@@ -40,19 +40,21 @@ def index_users2(request, n=1):
         # 执行数据查询，并放置到模板中
 
         # 判断搜索条件并封装
-        kw = request.GET.get("keyword", None)
+        kw = request.GET.get("keyword", "")
+        mywhere = ""  # 定义一个用于存储搜索条件的变量
         if kw is not None:
             list = Users.objects.filter(name__contains=kw)  # 模糊查询，即对name字段进行包含查询
+            mywhere = f"?keyword={kw}"  # 追加搜索条件
         else:
             list = Users.objects.filter()
-        p = Paginator(list, 5)  # 以5条数据一页实例化分页对象
+        p = Paginator(list, 10)  # 以5条数据一页实例化分页对象
         # 判断页码值n是否有效
         if n < 1:
             n = 1
         elif n > p.num_pages:
             n = p.num_pages
         ulist = p.page(n)
-        context = {"userslist": ulist, "n": n, "pagelist": p.page_range}  # n：当前页，pagelist：页码列表
+        context = {"userslist": ulist, "n": n, "pagelist": p.page_range, "mywhere": mywhere, "kw": kw}  # n：当前页，pagelist：页码列表
         return render(request, "myapp/users/index2.html", context)  # 加载模板
     # except:
     #     return HttpResponse("没有找到用户信息！")

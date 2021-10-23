@@ -1,6 +1,7 @@
 <H1>用户信息管理</H1>
 <a href="{% url 'index' %}">返回首页</a> |
-<a href="{% url 'indexUsers' %}">浏览用户信息</a> |
+<a href="{% url 'allUsers' %}">浏览所有用户信息</a> |
+<a href="{% url 'indexUsers2' 1 %}">分页浏览用户信息</a> |
 <a href="{% url 'addUsers' %}">添加用户信息</a>
 {% csrf_token %}
 <hr/>
