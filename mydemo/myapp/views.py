@@ -10,7 +10,7 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 
-# 首页
+# 首页---------------------------------------------------
 def index(request):
     # print(reverse("add"))  # 通过路由名称反向生成url请求地址
     print(reverse("index"))
@@ -24,7 +24,7 @@ def index(request):
     return render(request, "myapp/index/index.html", context)
 
 
-# 浏览用户信息
+# 浏览用户信息------------------------------------------------------------------
 def all_users(request):  # 所有用户信息
     try:
         ulist = Users.objects.all()
@@ -121,7 +121,7 @@ def update_users(request):
     return render(request, "myapp/users/info.html", context)
 
 
-# 模板继承
+# 模板继承----------------------------------------------------------------
 def inherit(request):
     return render(request, "myapp/inherit/sub_template.html")
 
@@ -150,3 +150,25 @@ def do_upload(request):
     # # 把缩放后的图像用jpeg格式保存
     # im.save("./static/pics/s_"+fileName, None)
     return HttpResponse("上传的文件："+fileName)
+
+
+# static静态文件操作 ------------------------------------------------------------
+def static_operation(request):
+    return render(request, "myapp/static/static.html")
+
+
+def show_static(request):  # 展示静态文件
+    return render(request, "myapp/static/MyStatic.html")
+
+
+def dcsy(request):  # 点餐首页
+    # 导入model，并从数据库中获取当前店铺下所有的菜品信息，并放置到下面模板中
+    return render(request, "myapp/static/diancan/dcsy.html")
+
+
+def dclb(request):  # 点餐列表
+    return render(request, "myapp/static/diancan/dclb.html")
+
+
+def login(request):  # 会员登入
+    pass
